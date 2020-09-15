@@ -1,4 +1,3 @@
-import argparse
 import json
 import os
 
@@ -78,35 +77,3 @@ class Data:
 
     def get_cnt_user_and_repo(self, user, repo, event) -> int:
         return self.__cnt_perPperR.get(user + repo + event, 0)
-
-
-def run():#命令行参数的设置（-i为初始化，-u为用户，-r为）
-    my_parser = argparse.ArgumentParser(description='analysis the json file')
-    my_parser.add_argument('-i', '--init', help='json file path')
-    my_parser.add_argument('-u', '--user', help='username')
-    my_parser.add_argument('-r', '--repo', help='repository name')
-    my_parser.add_argument('-e', '--event', help='type of event')
-    args = my_parser.parse_args()#命令行参数的解析
-
-    if args.init:
-        my_data = Data(path=args.init)
-    else:
-        my_data = Data()
-        if args.event:
-            if args.user:
-                if args.repo:
-                    print(my_data.get_cnt_user_and_repo(args.user, args.repo, args.event))
-                else:
-                    print(my_data.get_cnt_user(args.user, args.event))
-            else:
-                if args.repo:
-                    print(my_data.get_cnt_repo(args.repo, args.event))
-                else:
-                    print("missing argument: user or repo")
-        else:
-            print("missing argument: event")
-
-
-
-if __name__ == '__main__':
-    run()
