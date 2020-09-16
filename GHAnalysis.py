@@ -4,7 +4,7 @@ import os
 
 class Data:
 
-    def __init__(self, path:str=None):
+    def __init__(self, path:str=None):#如果没有路径就为None
         self.__dir_addr = path
 
         if path:
@@ -46,7 +46,7 @@ class Data:
 
     def __save2json(self):
         with open("1.json", 'w', encoding='utf-8') as f:
-            json.dump(self.__cnt_perP, f)
+            json.dump(self.__cnt_perP, f)#dump：将dict类型转换为json字符串格式，写入到文件 （易存储）
         with open("2.json", 'w', encoding='utf-8') as f:
             json.dump(self.__cnt_perR, f)
         with open("3.json", 'w', encoding='utf-8') as f:
@@ -59,7 +59,7 @@ class Data:
         self.__cnt_perR = {}
         self.__cnt_perPperR = {}
         with open("1.json", encoding='utf-8') as f:
-            self.__cnt_perP = json.load(f)
+            self.__cnt_perP = json.load(f)#load：针对文件句柄，将json格式的字符转换为dict，从文件中读取
         with open("2.json", encoding='utf-8') as f:
             self.__cnt_perR = json.load(f)
         with open("3.json", encoding='utf-8') as f:
@@ -87,7 +87,7 @@ def run():#命令行参数的设置（-i为初始化，-u为用户，-r为项目
     args = my_parser.parse_args()#命令行参数的解析
 
     if args.init:
-        my_data = Data(path=args.init)
+        my_data = Data(path=args.init)#第一次运行初始化
     else:
         my_data = Data()
         if args.event:
