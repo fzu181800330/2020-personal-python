@@ -9,13 +9,11 @@ class Data:
 
         if path:
             print("START")
-            if not os.path.exists(self.__dir_addr):
-                raise RuntimeError("Path doesn't exist.")
-            self.__read_1()
-            self.__analysis()
-            self.__save2json()
+            self.__read_1()#读取题目提供的json文件
+            self.__analysis()#分析数据
+            self.__save2json()#生成三个指定要求的json文件
         else:
-            self.__read_2()
+            self.__read_2()#在生成的三个json答案文件中找寻并传出答案
 
 
     def __read_1(self):
@@ -24,9 +22,9 @@ class Data:
             for file in files:
                 if file[-5:] == '.json' and file[-6:] != '1.json' and file[-6:] != '2.json' and file[-6:] != '3.json':
                     with open(file, 'r', encoding='utf-8') as f:
-                        self.__jsons = [x for x in f.read().split('\n') if len(x)>0]
+                        self.__jsons = [x for x in f.read().split('\n') if len(x)>0]#读取json文件并按行分割
                         for self.__json in self.__jsons:
-                            self.__dicts.append(json.loads(self.__json))
+                            self.__dicts.append(json.loads(self.__json))#将json文件转化成字典，并添加到列表之中
 
 
     def __analysis(self):
@@ -64,11 +62,11 @@ class Data:
             self.__cnt_perP = json.load(f)
         with open("2.json", encoding='utf-8') as f:
             self.__cnt_perR = json.load(f)
-        with open("1.json", encoding='utf-8') as f:
+        with open("3.json", encoding='utf-8') as f:
             self.__cnt_perPperR = json.load(f)
 
 
-    # get value from dictionary
+    # 从字典中获得对应值
 
     def get_cnt_user(self, user:str, event:str) -> int:
         return self.__cnt_perP.get(user + event, 0)
@@ -80,7 +78,7 @@ class Data:
         return self.__cnt_perPperR.get(user + repo + event, 0)
 
 
-def run():#命令行参数的设置（-i为初始化，-u为用户，-r为）
+def run():#命令行参数的设置（-i为初始化，-u为用户，-r为项目，-e为事件）
     my_parser = argparse.ArgumentParser(description='analysis the json file')
     my_parser.add_argument('-i', '--init', help='json file path')
     my_parser.add_argument('-u', '--user', help='username')
