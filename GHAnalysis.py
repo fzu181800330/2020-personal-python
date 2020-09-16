@@ -51,7 +51,7 @@ class Data:
             json.dump(self.__cnt_perR, f)
         with open("3.json", 'w', encoding='utf-8') as f:
             json.dump(self.__cnt_perPperR, f)
-        print("Save to json files successfully!")
+
 
 
     def __read_2(self):
