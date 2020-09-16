@@ -1,6 +1,7 @@
 import unittest
 import GHAnalysis
 
+
 class MyClassTest(unittest.TestCase):
     def test_queryu(self):#测试查询个人的 4 种事件的数量
         self.my_data = GHAnalysis.Data('.')
